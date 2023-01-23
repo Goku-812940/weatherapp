@@ -10,87 +10,29 @@
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/15f4694797.js" crossorigin="anonymous"></script>
-<style>
-    .form-control{
-        border-radius: 29px; 
-    }
-    body{
-        background-color:rgba(207,233,237,255) ;
-    }
-    .box{
-        background-color:rgba(217,237,241,255) ;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border-radius:11px;
-    }
-    .btn{
-        position: absolute;
-       left:69%;
-       top: 145px;
-    }
-    img{
-        height:243px;
-        width: 69%;
-    }
-    #a1{
-        margin-top:-67px;
-        margin-left: 18%;
-        font-size: 20px;
-    }
+<link rel="stylesheet" href="./app.css">
    
-    #w1{
-        margin-left: 28%;
-        margin-top: -17px;
-    }
-    #e1{
-        height:76px;
-        width: 76%; 
-        margin-left: 10%;
-        margin-top:8px;
-    }
-    .colll{
-        background-color:rgb(143, 206, 255) ;
-    }
-</style>
+
 
 </head>
 <body>
-<!-- 
-<div class="ms-3 me-3 mt-3">
-    <input class="form-control container w-50" type="text" id="cname" aria-label="default input example ">
-    <button class="btn" type="button" onclick=""><i class="fa-solid fa-magnifying-glass"></i></button>
-    </div>
 
-    <div>
-        <h1 class="">kerala,india</h1>
-        <i class="fa-solid fa-cloud-bolt-sun"></i>
-    </div> -->
-    <div class="row mt-5 ms-4 me-4 mb-4">
-        <div class="col-lg-3"></div>
-
-        <div class="col-lg-6 box mt-5 ">
-             <div class="ms-4 me-4 mt-5">
-                    <input class="form-control container w-70" type="text" id="cname" aria-label="default input example ">
-                    <button class="btn" type="button" onclick="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
-             </div>
-             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <img src="./image/1555512.png" alt="">
-                    <p id="a1">Weather Info</p>
-                    <p id="w1">Today</p>
-
-                 
-                    <img id="e1" src="./image/pinpng.com-weather-icons-png-6914237(1).png" alt=""><br>
-                </div>
-                <div id="result" class="col-lg-6 col-md-6 col-sm-6  colll ">
-
-                </div>
-             </div>
+    <div class="wrapper">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="container">
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Enter a city name"
+              id="cname"
+              
+            />
+            <button id="search-btn" onclick="search()">Search</button>
+          </div>
+          <div id="result"></div>
         </div>
-
-        <div class="line"></div>
-        <div class="col-lg-3 col-md-6 col-sm-6"></div>
-    </div>
-     
+      </div>
  </body>
  <script>
     function search(){
@@ -102,37 +44,26 @@
     function displaydata(data){
         city=data.name
         temparature=data.main.temp
-        weath=data.weather[0].main
-        hum=data.main.humidity
-        win=data.wind.speed
-        rise=data.sys.sunrise
-        set=data.sys.sunset
-        htmldata=`
-        <ul style="list-style:none;margin-top:40px">
-    <li> ${city}</li><br>
-   
-    
-   <li>Temparature : ${Math.floor(temparature-273.15)}°C</li><br>
-   
-  
-   <li>Weather : ${weath}</li><br>
-  
-   
-   <li>Humidity : ${hum}%</li><br>
- 
-   
-   <li>Wind Speed : ${win}m/s</li><br>
-  
-   
-    <li>Sunrise :${rise}</li> <br>
-   
-   
-    <li>Sunset : ${set}</li><br>
-  </ul>`
-
+      
+        htmldata=
+     
+`<h2>${city}</h2>
+        <h4 class="weather">${data.weather[0].main}</h4>
+        <h4 class="desc">${data.weather[0].description}</h4>
+        <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png">
+        <h1>${Math.floor(temparature-273.15)} &#176;</h1>
+        <div class="temp-container">
+            <div>
+                <h4 class="title">min</h4>
+                <h4 class="temp">${Math.floor(data.main.temp_min-273.15)}&#176;</h4>
+            </div>
+            <div>
+                <h4 class="title">max</h4>
+                <h4 class="temp">${Math.floor(data.main.temp_max-273.15)}&#176;</h4>
+            </div>
+        </div>`
   result.innerHTML=htmldata
-
-
     }
+    
  </script>
 </html>
